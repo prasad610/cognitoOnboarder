@@ -1,0 +1,20 @@
+[
+    {
+        "userName":"username",
+        "userAttribute":[
+            {
+                "Name": "email",
+                "Value": "username@domain.com"
+            },
+            {
+                "Name": "name",
+                "Value": "user"
+            },
+            {
+                "Name": "email_verified",
+                "Value": "true"
+            }
+        ],
+        "group":["group"]
+    }
+]

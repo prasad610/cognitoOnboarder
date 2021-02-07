@@ -130,3 +130,6 @@ dmypy.json
 
 # Visual studio
 .vscode
+
+# Config Files
+config.ini

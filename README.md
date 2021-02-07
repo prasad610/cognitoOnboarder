@@ -1,5 +1,7 @@
 # Auto import users with groups
 
+A python project which allows the user to onboard multiple user to cognito with all user attribute as oppose to the selective attribute that the import job of cognito provides for mass onboarding.
+
 ## Dependencies
 
 - Python 3.8

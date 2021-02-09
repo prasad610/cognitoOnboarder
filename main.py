@@ -12,9 +12,10 @@ def main():
         exit(0)
 
     data = json.loads(data)
-    
+    failedUser = []
     for user in data:
-        cognitoObject.addUser(user)
+        failedUser.append(cognitoObject.addUser(user))
+    print(failedUser)
 
 if __name__ == '__main__':
     main()

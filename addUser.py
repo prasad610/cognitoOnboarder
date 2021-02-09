@@ -6,12 +6,13 @@ class AddUserToCognito:
         config = configparser.ConfigParser()
         config.read("config.ini")
         self.variables = config["DEFAULT"]
-        self.client = boto3.client('sts')
-        self.client.get_session_token(
-            DurationSeconds=int(self.variables.get("DURATION_SECONDS")),
-            SerialNumber=self.variables.get("SERIAL_NUMBER"),
-            TokenCode=input("Enter otp : ")
-        )
+        if ( self.variables.get("isMFA").lower()=="true" ):
+            self.client = boto3.client('sts')
+            self.client.get_session_token(
+                DurationSeconds=int(self.variables.get("DURATION_SECONDS")),
+                SerialNumber=self.variables.get("SERIAL_NUMBER"),
+                TokenCode=input("Enter otp : ")
+            )
         self.client = boto3.client('cognito-idp',
             region_name=self.variables.get("REGION"))
 
@@ -21,6 +22,11 @@ class AddUserToCognito:
         self.availableGroups = [ groups["GroupName"] for groups in availableGroups["Groups"]]
 
     def addUser(self,user):
+
+        if user["group"] not in self.availableGroups:
+            print("Group {group} does not exist".format(group=user["group"]))
+            return user
+
         try:
             self.client.admin_create_user(
                 UserPoolId=self.variables.get("USERPOOL_ID"),

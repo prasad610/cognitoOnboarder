@@ -23,8 +23,8 @@ class AddUserToCognito:
 
     def addUser(self,user):
 
-        if user["group"] not in self.availableGroups:
-            print("Group {group} does not exist".format(group=user["group"]))
+        if not set(user["group"]).issubset(self.availableGroups):
+            print("Some groups from {group} does not exist in cognito.".format(group=user["group"]))
             return user
 
         try:
